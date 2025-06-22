@@ -2,7 +2,7 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import Link from "next/link";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { NAV_LINKS } from '@/libs/constants';
 
@@ -20,8 +20,15 @@ const Navbar = () => {
     const pathname = usePathname(); 
     const pageName = pathname.replace('/', '').split(/(?=[A-Z])/).join(' ');
 
+    useEffect(() => {
+        if(pathname.includes(activeTab)){
+            setActiveTab(pathname);
+        }
+    }, []);
+
+
     return (
-        <div className={`navbar px-2 sm:block sm:col-span-2 ${menuOpen && `h-screen`}`}>
+        <div className={`navbar px-2 sm:block sm:col-span-2 sm:!sticky sm:!top-0 sm:h-screen ${menuOpen && `h-screen`}`}>
             {!menuOpen && 
                <div className="flex flex-row gap-2">
                     <button title='Navigation' className='block sm:hidden' onClick={() =>{setMenuOpen(true)}}>
@@ -37,10 +44,12 @@ const Navbar = () => {
                             <CloseIcon />
                         </button>
                     </div>
-                    <div className='hidden sm:block' style={{width: '100%', height: '48px', backgroundColor: 'wheat'}}>Logo img here</div>
+                    <Link href={'/'} title='Back to Home'>
+                        <div className='hidden sm:block' style={{width: '100%', height: '48px', backgroundColor: 'wheat'}}>Logo img here</div>
+                    </Link>
                     <div className="links flex flex-col">
                         {NAV_LINKS.map((link, index) => (
-                            <Link key={index} href={link.href} className={`flex justify-between w-9/10 p-2 ${activeTab === link.href && 'bg-stone-300'} `} onClick={()=>handleSelection(link)}>
+                            <Link key={index} href={link.href} className={`flex justify-between p-2 ${activeTab === link.href && 'bg-stone-300'} `} onClick={()=>handleSelection(link)}>
                                 {link.page_name}
                                 {link.icon}
                             </Link>
