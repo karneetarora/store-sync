@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { NAV_LINKS } from '@/libs/constants';
-
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('');
@@ -28,13 +27,13 @@ const Navbar = () => {
 
 
     return (
-        <div className={`navbar px-2 sm:block sm:col-span-2 sm:!sticky sm:!top-0 sm:h-screen ${menuOpen && `h-screen`}`}>
+        <div className={`navbar px-2 sm:block sm:col-span-2 sm:!sticky sm:!top-0 sm:h-screen ${menuOpen && `h-screen overflow-y-hidden`}`}>
             {!menuOpen && 
                <div className="flex flex-row gap-2">
                     <button title='Navigation' className='block sm:hidden' onClick={() =>{setMenuOpen(true)}}>
                         <MenuIcon />
                     </button> 
-                    <h2 className='sm:hidden'>{pageName}</h2>
+                    <h2 className='text-xl font-bold sm:hidden'>{pageName}</h2>
                </div>
             } 
                 <div className={`${sidebarWidth} sm:block`}>
@@ -44,12 +43,12 @@ const Navbar = () => {
                             <CloseIcon />
                         </button>
                     </div>
-                    <Link href={'/'} title='Back to Home'>
-                        <div className='hidden sm:block' style={{width: '100%', height: '48px', backgroundColor: 'wheat'}}>Logo img here</div>
+                    <Link href={'/'} title='Back to Home' className='hidden sm:block mb-2'>
+                        <img src="\logo2.jpg" alt="logo" className="w-full h-24" />
                     </Link>
                     <div className="links flex flex-col">
                         {NAV_LINKS.map((link, index) => (
-                            <Link key={index} href={link.href} className={`flex justify-between p-2 ${activeTab === link.href && 'bg-stone-300'} `} onClick={()=>handleSelection(link)}>
+                            <Link key={index} href={link.href} className={`flex w-9/10 justify-between p-2 ${activeTab === link.href && 'bg-stone-300'} sm:text-xs sm:w-full md:text-sm `} onClick={()=>handleSelection(link)}>
                                 {link.page_name}
                                 {link.icon}
                             </Link>
