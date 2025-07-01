@@ -13,10 +13,13 @@ export async function getCustomers(query:string) {
   }
 }; 
 
-export async function addNewCustomer(formData:any){
-  // const form = new FormData(event.currentTarget);
-  // console.log(form.get('first_name'))
+export async function addNewCustomer(formData:FormData){
+//two way to extract values from form 
   const firstName = formData.get('first_name'); 
-  console.log('first_name:' + firstName); 
+  console.log(firstName);
+
+     for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    } 
 
 }

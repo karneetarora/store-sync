@@ -27,9 +27,9 @@ const Navbar = () => {
 
 
     return (
-        <div className={`navbar px-2 sm:block sm:col-span-2 sm:!sticky sm:!top-0 sm:h-screen ${menuOpen && `h-screen overflow-y-hidden`}`}>
+        <div className={`navbar sm:block sm:col-span-2 sm:!sticky sm:!top-0 sm:h-screen ${menuOpen && `h-screen overflow-y-hidden`}`}>
             {!menuOpen && 
-               <div className="flex flex-row gap-2">
+               <div className="flex flex-row gap-2 my-2">
                     <button title='Navigation' className='block sm:hidden' onClick={() =>{setMenuOpen(true)}}>
                         <MenuIcon />
                     </button> 
