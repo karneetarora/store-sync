@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`flex flex-col sm:grid sm:grid-cols-12 gap-x-1 py-2 px-4 antialiased`}
+        className={`flex flex-col p-4 sm:grid sm:grid-cols-12 gap-x-1 sm:py-2 sm:px-0 antialiased`}
       >
         <Navbar />
         {children}

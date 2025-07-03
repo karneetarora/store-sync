@@ -1,22 +1,29 @@
 import { addNewCustomer } from "@/libs/data";
+import { ArrowBack } from "@mui/icons-material";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Link from "next/link";
 
 const NewCustomer = () =>{
 
 
     return(
-        <div className="sm:col-span-10">
-            <h2 className="pageTitle hidden text-2xl font-bold sm:block">New Customer</h2>
-            <p className="mb-4">
+        <div className="sm:col-span-10 sm:px-2">
+            <Link href={'/Customers'} className="flex flex-row gap-1 my-2 underline !text-xs items-center" style={{color: '#1976d2'
+            }}>
+                <ArrowBack fontSize='small' className="!text-xs "/>
+                Back
+            </Link>
+            <h2 className="pageTitle my-2 hidden text-2xl font-bold sm:block">New Customer</h2>
+            <p className="pageDescription md:!mb-4 text-sm lg:text-md">
                 Please fill out all fields below to create a new customer profile, the information you provide will be used for receipts and shipping purposes.
             </p>
-            <div className="formBox sm:w-8/10">
+            <div className="formBox w-full lg:w-10/12">
                 <form action={addNewCustomer} className="flex flex-col gap-4 md:gap-8">
                     <div className="flex flex-col gap-y-6 sm:flex-row gap-x-8">
                         <TextField variant="outlined" name="first_name" label='First Name' required className="sm:w-1/3" />
                         <TextField variant="outlined" name="middle_name" label='Middle Name' className="sm:w-1/3" />
-                        <TextField variant="outlined" name='last_name' label='Last Name' required type='' className="sm:w-1/3" />
+                        <TextField variant="outlined" name='last_name' label='Last Name' required type='' className="sm:w-1/3"/>
                     </div>
                     <div className="flex flex-col gap-y-6 sm:flex-row gap-x-8">
                         <TextField variant="outlined" name='phone_number' label='Phone Number' type="tel" required className="sm:w-1/3" />
