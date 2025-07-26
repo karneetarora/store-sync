@@ -1,49 +1,43 @@
 import { Button, TextField } from "@mui/material";
-import CustomersTable from "./CustomersTable";
+import CustomersTable from "../Customers/CustomersTable";
 import Link from "next/link";
 import { Download, FilterList, PersonAdd } from "@mui/icons-material";
 import SearchBar from "../Components/SearchBar"
-// import { getCustomers } from "@/libs/data";
-import Footer from "../Components/Footer";
+import { getCustomers } from "@/libs/data";
 
-  interface Customer {
-    id: number;
-    name: string;
-    email: string;
-  }; 
+const Invoices =  async (
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+  }>
+) => {
 
-export default async function Customers({
-      searchParams,
-    }: {
-      searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-    }) {
-    const params = await searchParams;
-    const searchQuery = params.search || '';
-    const apiUrl = `http://localhost:3000/api/Customers?search=${encodeURIComponent(searchQuery)}`;
-    const res = await fetch(apiUrl);
-      if (!res.ok) {
-        //TODO: handle error
-        console.log('Failed to fetch data');
-      }
-      const customerData = await res.json();
+    const query = (await searchParams)?.query || '';
+    const currentPage = Number((await searchParams)?.page) || 1;
+
+  console.log(query);
+    //const data = await fetchFilteredData(query, currentPage);
+    //const custData = await getCustomers(query); 
 
     return (
-        <div className="actual-content customersPage px-2">
+        <div className="invoicePage actual-content sm:col-span-10 px-2">
             <div className="pageHeader">
                 {/* <h2 className="pageTitle hidden sm:block">Customers</h2> */}
-                <h2 className="hidden text-2xl font-bold sm:block ">Customers</h2>                
-                  <SearchBar placeholder="Search Customer"/>
+                <h2 className="hidden text-2xl font-bold sm:block ">Invoices</h2>                
+                <div className="">
+                  <SearchBar placeholder="Search Invoice"/>
+                </div>
                 <Link title='Create New Customer Profile' href={'Customers/NewCustomer'}>
                   <Button variant="contained" color="primary" className="mainBtn" endIcon={<PersonAdd className=""/>}>
                      <p className="hidden md:block">
-                        New Customer
+                        New Invoices
                      </p>
                   </Button>
                 </Link>
             </div>
             <div className="flex flex-col flex-row justify-between items-center">
               <p className="pageDescription m-0 text-xs sm:text-sm">
-                  Manage your customers and their orders or create a new customer profile.
+                  Manage or add invoices to efficiently manage your billing records.
               </p>
               <div className="table-btns flex flex-row gap-2 my-2 sm:my-0">
                 <Button variant="text" size="small" endIcon={<Download className="!text-sm !sm:text-md"/>} className="grow-1">
@@ -52,9 +46,11 @@ export default async function Customers({
               </div>
             </div>
             <div className="pageContent">
-              <CustomersTable data={customerData}/>
-              {/* <Footer /> */}
+              <CustomersTable data={null}/>
+
             </div>
         </div>
     )
 }; 
+
+export default Invoices;

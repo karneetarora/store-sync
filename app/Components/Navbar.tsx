@@ -27,7 +27,7 @@ const Navbar = () => {
 
 
     return (
-        <div className={`navbar sm:block sm:col-span-2 sm:!sticky sm:!top-0 sm:h-screen ${menuOpen && `h-screen overflow-y-hidden`}`}>
+        <div className={`navbar sm:block sm:col-span-2 sm:row-span-full sm:!sticky sm:!top-0 ${menuOpen && `overflow-y-hidden`}`} style={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px'}}>
             {!menuOpen && 
                <div className="flex flex-row gap-2 my-2">
                     <button title='Navigation' className='block sm:hidden' onClick={() =>{setMenuOpen(true)}}>
@@ -43,10 +43,10 @@ const Navbar = () => {
                             <CloseIcon />
                         </button>
                     </div>
-                    <Link href={'/'} title='Back to Home' className='hidden sm:block mb-2'>
+                    {/* <Link href={'/'} title='Back to Home' className='hidden sm:block mb-2'>
                         <img src="\logo2.jpg" alt="logo" className="w-full h-24" />
-                    </Link>
-                    <div className="links flex flex-col">
+                    </Link> */}
+                    <div className="links flex flex-col px-2">
                         {NAV_LINKS.map((link, index) => (
                             <Link key={index} href={link.href} className={`flex w-9/10 justify-between p-2 ${activeTab === link.href && 'bg-stone-300'} sm:text-xs sm:w-full md:text-sm `} onClick={()=>handleSelection(link)}>
                                 {link.page_name}

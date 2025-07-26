@@ -15,8 +15,7 @@ export async function getCustomers(query:string) {
 
 export async function addNewCustomer(formData:FormData){
 //two way to extract values from form 
-  const firstName = formData.get('first_name'); 
-  console.log(firstName);
+  //const firstName = formData.get('first_name'); 
 
      for (const [key, value] of formData.entries()) {
       console.log(`${key}: ${value}`);

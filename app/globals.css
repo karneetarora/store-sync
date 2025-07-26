@@ -23,10 +23,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  display: grid;
 }
+
+/** Layout */
+
+
 
 .navbar{
   /* background-color: #f8fafc; */
+}
+
+.card-shadow{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .pageHeader{
@@ -41,16 +50,49 @@ body {
 }
 
 .pageContent{
-  margin-top: 0.5rem;
+
 }
 
 .searchBar .MuiInputBase-input{
   padding: 0.5rem !important;
 }
 
+/** Defining grid areas to reference for layout */
+
+.topbar{
+  grid-area: topbar; 
+}
+.navbar{
+  grid-area: navbar; 
+}
+.footer{
+  grid-area: footer;
+}
+.content{
+  grid-area: actual-content;
+}
+
 
 @media screen and (max-width: 440px){
   .mainBtn .MuiButton-icon{
     margin: 0;
+  }
+}
+
+@media (width >= 700px) {
+  body {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "topbar topbar  topbar "
+      "navbar content content "
+      "navbar content content "
+      "navbar footer  footer";
+  }
+  .actual-content{
+    grid-column: 2 / -1;
+  }
+  .navbar{
+    min-width: 200px;
   }
 }

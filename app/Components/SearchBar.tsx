@@ -19,13 +19,25 @@ const SearchBar = ({placeholder = 'Search'}: Search) => {
     const { replace } = useRouter();
 
     const handleClear = () => {
-        setUserInput(''); //setting search to null
+        setUserInput('');
+        handleSearch(""); //setting search to null and refresh results
     }; 
 
+    const handleSearch = (term: string) => {
+        const params = new URLSearchParams(searchParams);
+        if (term) {
+            params.set('search', term);
+        } else {
+            params.delete('search');
+        }
+        const newUrl = `${pathname}?${params.toString()}`;
+        replace(newUrl);
+    }
+    
     return(
-        <Form action={pathname}>
+         <Form action={pathname}>
             <div className="searchBar">
-                <TextField variant="outlined" placeholder={placeholder} name="query" value={userInput} className="p-2" 
+                <TextField variant="outlined" placeholder={placeholder} name="query" value={userInput} className="p-2 md:w-sm" 
                     slotProps={{
                     input: {
                     endAdornment: <InputAdornment position="end">
@@ -34,10 +46,11 @@ const SearchBar = ({placeholder = 'Search'}: Search) => {
                             </IconButton>
                         </InputAdornment>,
                     }}}
-                    onChange={(e:any) => {setUserInput(e.target.value);}}
+                    onChange={(e:any) => { setUserInput(e.target.value); handleSearch(e.target.value);}}
+                    
                 />
             </div>
-        </Form>
+         </Form>
     )
 
 }; 
